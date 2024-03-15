@@ -12,6 +12,7 @@ export const DataProvider = ({ children }) => {
   const [Error, setError] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [Fetching, setFetching] = useState(true);
+  const [Commodities,setCommodities] = useState(false);
 
   function generateRandomString(length) {
     const characters =
@@ -66,6 +67,7 @@ export const DataProvider = ({ children }) => {
      setStockData(sliced);
       setLoading(false)
       setError(false);
+      setCommodities(false);
     } catch (error) {
       setError(true);
       console.log("Error = ", error);
@@ -100,6 +102,7 @@ export const DataProvider = ({ children }) => {
       setStockData(sliced);
       console.log("Function Invoked again");
       setError(false);
+      setCommodities(false);
     } catch (error) {
       console.log("Function Not Invoked");
        setError(true);
@@ -121,6 +124,24 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const FetchCommodities = async (text) => {
+    try {
+      const responseData = await fetch(
+        `https://www.alphavantage.co/query?function=${text}&interval=monthly&apikey=${randomString}`
+      );
+      const resdata = await responseData.json();
+      // setStockData(resdata.data);
+          const sliced = resdata.data.slice(0, 15);
+          console.log(sliced);
+      setStockData(sliced);
+      setCommodities(true);
+      // setMainData(resdata.markets);
+    } catch (error) {
+      setError(true);
+      console.log("Error = ", error);
+    }
+  };
+
   useEffect(() => {
     fetchStockData();
     fetchGlobalMarketStatus();
@@ -129,6 +150,7 @@ export const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
+        FetchCommodities,
         Loading,
         handleSearchResult,
         stock,
@@ -142,6 +164,7 @@ export const DataProvider = ({ children }) => {
         randomString,
         Error,
         setError,
+        Commodities,
       }}
     >
       {children}

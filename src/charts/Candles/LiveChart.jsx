@@ -2,45 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import { randomString } from './Constant';
 import { useData } from '../../Context/DataContext';
 
-const CandlestickChart = () => {
+export const CandlestickChart = () => {
   // Data Came from DataContext
     const { stock } = useData(); 
-  // const [data, setStockData] = useState([]);
-
-  // const fetchStockData = async (symbol) => {
-  //   // https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=IBM&
-  //           try {
-  //             const response = await fetch(`${process.env.REACT_APP_API}query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey=${randomString}`)
-  //             const data = await response.json()
-              
-  //             const weeklyTimeSeries = data['Time Series FX (Daily)'];
-  //             const dates = Object.keys(weeklyTimeSeries);
-  //             const datesData = [];
-  //             dates.forEach((date) => {
-  //                 const weeklyData = weeklyTimeSeries[date];
-  //                 const dateData = {
-  //                   date: date,
-  //                   open: weeklyData['1. open'],
-  //                   high: weeklyData['2. high'],
-  //                   low: weeklyData['3. low'],
-  //                   close: weeklyData['4. close'],
-  //                   volume: weeklyData['5. volume']
-  //                 };
-  //                 datesData.push(dateData);
-  //               });
-  //             console.log(data," And ",datesData)
-  //             setStockData(datesData)
-  //           } catch (error) {
-  //             console.log("Error = ",error)
-  //           }
-  //         }
-      
-  //         useEffect(() => {
-  //           fetchStockData(); 
-  //         }, [])
+  
   const [chartOptions, setChartOptions] = useState({
     series: [{
       data: stock.map(({ date, open, high, low, close }) => ({
@@ -106,5 +73,3 @@ const CandlestickChart = () => {
     </div>
   );
 };
-
-export default CandlestickChart;

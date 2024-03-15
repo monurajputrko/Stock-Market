@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-const BarChart = ({ serverData }) => {
+export const BarChart = ({ serverData }) => {
   // Get unique values for each field
   console.log(serverData);
   const stockData = serverData || [];
@@ -65,4 +65,41 @@ const BarChart = ({ serverData }) => {
 };
 
 
-export default BarChart;
+
+export const ComBarChart = ({ serverData }) => {
+  const stockData = serverData || [];
+  const dates = stockData.map((data) => data.date);
+  const values = stockData.map((data) => parseFloat(data.value));
+
+  const datasets = [
+    {
+      label: "Values",
+      data: values,
+      backgroundColor: "green",
+      borderColor: "green",
+      borderWidth: 1,
+    },
+  ];
+
+  return (
+    <div style={{ height: "50vh" }}>
+      <Bar
+        data={{
+          labels: dates,
+          datasets: datasets,
+        }}
+        options={{
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: false,
+            },
+          },
+        }}
+        height={300}
+      />
+    </div>
+  );
+};
+
+

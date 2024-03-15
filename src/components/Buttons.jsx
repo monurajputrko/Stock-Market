@@ -4,7 +4,7 @@ import { useData } from '../Context/DataContext';
 
 export default function Buttons() {
 
-     const { setChangeChart } = useData(); // Data Came from DataContext
+     const { setChangeChart, Commodities } = useData(); // Data Came from DataContext
 
   return (
     <div>
@@ -13,7 +13,7 @@ export default function Buttons() {
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
-          gap:"5px",
+          gap: "5px",
           flexDirection: "row",
           alignItems: "center",
         }}
@@ -52,15 +52,19 @@ export default function Buttons() {
         </Button>
 
         {/*  When Selecting Doughnut Chart */}
-        {/* <Button
-          variant="info"
-          onClick={() => {
-            setChangeChart("DoughnutChart");
-          }}
-          style={{ marginLeft: "1vw", width: "10rem" }}
-        >
-          Doughnut
-        </Button> */}
+        {Commodities ? (
+         ""
+        ) : (
+          <Button
+            variant="info"
+            onClick={() => {
+              setChangeChart("candle");
+            }}
+            style={{ marginLeft: "1vw", width: "10rem" }}
+          >
+            Candle Chart
+          </Button>
+        )}
 
         {/*  When Selecting Polar Chart */}
         {/* <Button
@@ -90,7 +94,7 @@ export default function Buttons() {
 
 export const FetchButtons = () => {
 
-     const { setChangeChart } = useData(); // Data Came from DataContext
+     const { setChangeChart, FetchCommodities } = useData(); // Data Came from DataContext
 
   return (
     <div>
@@ -108,7 +112,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("LineChart");
+            FetchCommodities("WTI");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -116,21 +120,12 @@ export const FetchButtons = () => {
         </Button>
 
         {/*  When Selecting Radar Chart */}
-        <Button
-          variant="info"
-          onClick={() => {
-            setChangeChart("RadarChart");
-          }}
-          style={{ marginLeft: "1vw", width: "10rem" }}
-        >
-          Radar chart
-        </Button>
-
+       
         {/*  When Selecting Bar Chart */}
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("BarChart");
+            FetchCommodities("NATURAL_GAS");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -142,6 +137,7 @@ export const FetchButtons = () => {
           variant="info"
           onClick={() => {
             // setChangeChart("DoughnutChart");
+            FetchCommodities("COPPER");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -152,7 +148,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PolarChart");
+            FetchCommodities("ALUMINUM");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -163,7 +159,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PieChart");
+           FetchCommodities("WHEAT");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -172,7 +168,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PieChart");
+           FetchCommodities("CORN");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -181,7 +177,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PieChart");
+            FetchCommodities("COTTON");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -190,7 +186,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PieChart");
+            FetchCommodities("SUGAR");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
@@ -199,7 +195,7 @@ export const FetchButtons = () => {
         <Button
           variant="info"
           onClick={() => {
-            // setChangeChart("PieChart");
+           FetchCommodities("COFFEE");
           }}
           style={{ marginLeft: "1vw", width: "10rem" }}
         >
