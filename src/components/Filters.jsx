@@ -1,7 +1,7 @@
 
 
 import { useData } from '../Context/DataContext';
-import Buttons from './Buttons';
+import Buttons, { FetchButtons } from './Buttons';
 import AllCharts from '../charts/AllCharts';
 import '../App.css'
 
@@ -47,7 +47,8 @@ const Filters = () => {
             Reset Filters
           </Button> */}
         </div>
-       
+        <FetchButtons />
+        <br />
         {/* Component for Chart Buttons */}
         <Buttons />
 

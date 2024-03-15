@@ -87,3 +87,126 @@ export default function Buttons() {
     </div>
   );
 }
+
+export const FetchButtons = () => {
+
+     const { setChangeChart } = useData(); // Data Came from DataContext
+
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "5px",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        {/*  When Selecting Line Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("LineChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Crude Oil
+        </Button>
+
+        {/*  When Selecting Radar Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            setChangeChart("RadarChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Radar chart
+        </Button>
+
+        {/*  When Selecting Bar Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("BarChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Natural Gas
+        </Button>
+
+        {/*  When Selecting Doughnut Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("DoughnutChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Copper
+        </Button>
+
+        {/*  When Selecting Polar Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PolarChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Aluminum
+        </Button>
+
+        {/*  When Selecting Pie Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PieChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Wheat
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PieChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Corn
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PieChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Cotton
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PieChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Sugar
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => {
+            // setChangeChart("PieChart");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          Coffee
+        </Button>
+       
+      </div>
+    </div>
+  );
+}

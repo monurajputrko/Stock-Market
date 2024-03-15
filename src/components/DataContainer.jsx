@@ -9,7 +9,7 @@ const DataContainer = () => {
   return (
     <div className="tabsClass">
       {/* Form for Searching */}
-      <form
+      <div
         className="form-inline"
         style={{ display: "flex", justifyContent: "space-evenly" }}
       >
@@ -25,10 +25,10 @@ const DataContainer = () => {
           style={{ marginRight: "1rem" }}
         />
         {/* Button for Search button */}
-        <button onClick={()=>{handleSearchResult();}} class="btn btn-dark">
+        <button onClick={() => { console.log("Function Invoked"); handleSearchResult();}} class="btn btn-dark">
           Search
         </button>
-      </form>
+      </div>
     <br />
       {/* Components for Filter And Charts */}
       <Filters />

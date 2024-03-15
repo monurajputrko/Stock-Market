@@ -61,7 +61,9 @@ export const DataProvider = ({ children }) => {
         };
         datesData.push(dateData);
       });
-      setStockData(datesData);
+     const sliced = datesData.slice(0, 15);
+     console.log(sliced);
+     setStockData(sliced);
       setLoading(false)
       setError(false);
     } catch (error) {
@@ -73,10 +75,12 @@ export const DataProvider = ({ children }) => {
   console.log(stock);
   const handleSearchResult = async () => {
     try {
-      const responseData1 = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${search}.BSE&outputsize=full&apikey=qdkxseuesdhfue`);
+      const responseData1 = await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${search}.BSE&outputsize=full&apikey=qdkxseuesdhfue`
+      );
       const resdata1 = await responseData1.json();
 
-      const weeklyTimeSeries = resdata1["Time Series FX (Daily)"];
+      const weeklyTimeSeries = resdata1["Time Series (Daily)"];
       const dates = Object.keys(weeklyTimeSeries);
       const datesData = [];
       dates.forEach((date) => {
@@ -91,9 +95,13 @@ export const DataProvider = ({ children }) => {
         };
         datesData.push(dateData);
       });
-      setStockData(datesData);
+      const sliced = datesData.slice(0, 15);
+      console.log(sliced);
+      setStockData(sliced);
+      console.log("Function Invoked again");
       setError(false);
     } catch (error) {
+      console.log("Function Not Invoked");
        setError(true);
       console.log("Error = ", error);
     }

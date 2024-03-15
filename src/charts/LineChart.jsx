@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 
 const LineChart = ({ serverData }) => {
   // Extract dates, opening prices, and closing prices
-  console.log(serverData)
+  // console.log(serverData)
   const stockData = serverData || [];
   const dates = stockData.map((data) => data.date).reverse(); // Reverse to show recent dates first
   const openingPrices = stockData.map((data) => parseFloat(data.open));
