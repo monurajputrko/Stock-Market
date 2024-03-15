@@ -10,6 +10,7 @@ export const DataProvider = ({ children }) => {
   const [search, setSearch] = useState(""); // State for Storing Search Data
   const [stock, setStockData] = useState([]);
   const [Error, setError] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [Fetching, setFetching] = useState(true);
 
   function generateRandomString(length) {
@@ -38,7 +39,7 @@ export const DataProvider = ({ children }) => {
     //   key = "";
     //   url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=EPL.BSE&outputsize=full&apikey=${randomString}`;
     // }
-
+    setLoading(true)
     try {
       const response = await fetch(
         "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey=qdkxseuesdhfue"
@@ -61,6 +62,7 @@ export const DataProvider = ({ children }) => {
         datesData.push(dateData);
       });
       setStockData(datesData);
+      setLoading(false)
       setError(false);
     } catch (error) {
       setError(true);
@@ -119,6 +121,7 @@ export const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
+        Loading,
         handleSearchResult,
         stock,
         setStockData,

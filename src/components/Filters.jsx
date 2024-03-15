@@ -1,6 +1,5 @@
 
-import Button from 'react-bootstrap/Button';
-import { Dropdown } from 'react-bootstrap';
+
 import { useData } from '../Context/DataContext';
 import Buttons from './Buttons';
 import AllCharts from '../charts/AllCharts';
@@ -8,7 +7,7 @@ import '../App.css'
 
 const Filters = () => {
 
-    const { handleReset, handleSelect } = useData();  // Data Came from DataContext
+    const { Loading } = useData();  // Data Came from DataContext
  
     return (
       <>
@@ -53,7 +52,7 @@ const Filters = () => {
         <Buttons />
 
         {/* Component for Charts */}
-        <AllCharts />
+        {Loading ? <div style={{display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center",marginTop:"10px"}}><h1>Loading....</h1></div> : <AllCharts />}
       </>
     );
 }
