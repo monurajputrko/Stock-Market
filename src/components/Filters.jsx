@@ -4,6 +4,7 @@ import { useData } from '../Context/DataContext';
 import Buttons, { FetchButtons } from './Buttons';
 import AllCharts from '../charts/AllCharts';
 import '../App.css'
+import '../components/Loader.css';
 
 const Filters = () => {
 
@@ -19,15 +20,28 @@ const Filters = () => {
             flexDirection: "row",
             alignItems: "center",
           }}
-        >
-        </div>
+        ></div>
         <FetchButtons />
         <br />
         {/* Component for Chart Buttons */}
         <Buttons />
-     
+
         {/* Component for Charts */}
-        {Loading ? <div style={{display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center",marginTop:"10px"}}><h1>Loading....</h1></div> : <AllCharts />}
+        {Loading ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
+          >
+            <div class="loader"></div>
+          </div>
+        ) : (
+          <AllCharts />
+        )}
       </>
     );
 }

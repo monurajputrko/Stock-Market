@@ -1,11 +1,8 @@
 
 import PolarChart from './PolarChart';
-import DoughnutChart from './DoughnutChart';
 import "../components/Loader.css";
 import { ComBarChart, BarChart } from "./BarChart";
 import {ComLineChart, LineChart} from './LineChart';
-import RadarChart from './RadarChart';
-import PieChart from './PieChart';
 import { useData } from '../Context/DataContext';
 import { CandlestickChart } from "./Candles/LiveChart";
 
