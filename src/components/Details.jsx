@@ -7,6 +7,7 @@ import Buttons, { FetchButtons, FetchDetailFilter } from "./Buttons";
 import '../App.css';
 import { CardsForSearch } from "./CardsForData";
 import Errors from "./Error";
+import Header from "./Header";
 
 
 export default function Details() {
@@ -39,7 +40,8 @@ export default function Details() {
            <Errors />
          </>
        ) : (
-         <>
+           <>
+             <Header />
            <br />
            <div
              className="form-inline"
