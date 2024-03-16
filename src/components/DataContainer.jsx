@@ -1,10 +1,11 @@
 import "../App.css";
-import CardsForData from "./CardsForData";
+import {CardsForData, CardsForSearch} from "./CardsForData";
 import Filters from "./Filters";
 import { useData } from "../Context/DataContext";
 
 const DataContainer = () => {
-  const { handleSearchResult, setSearch, mainData } = useData(); // Data Came From DataContext
+  const { handleSearchResult, setSearch, mainData, fetchGlobalSearch } =
+    useData(); // Data Came From DataContext
 
   return (
     <div className="tabsClass">
@@ -17,27 +18,37 @@ const DataContainer = () => {
         <input
           className="form-control mr-sm-2"
           type="search"
-          placeholder="Search by Sector Name, Topic, Title, Pestle, Source, Insight, URL..."
+          placeholder="Search Stocks"
           aria-label="Search"
           onChange={(e) => {
             setSearch(e.target.value);
+            fetchGlobalSearch(e.target.value);
           }}
           style={{ marginRight: "1rem" }}
         />
         {/* Button for Search button */}
-        <button onClick={() => { console.log("Function Invoked"); handleSearchResult();}} class="btn btn-dark">
+        <button
+          onClick={() => {
+            console.log("Function Invoked");
+            handleSearchResult();
+          }}
+          class="btn btn-dark"
+        >
           Search
         </button>
       </div>
-    <br />
+      <br />
       {/* Components for Filter And Charts */}
       <Filters />
 
+      {/* {mainData.length > 0 && (
+        <div class="ag-format-container">
+          <CardsForData item={mainData} />
+        </div>
+      )} */}
       {mainData.length > 0 && (
         <div class="ag-format-container">
-          {/* Map for Showing Cards  */}
-          {/* {mainData.map((e, i) => { */}
-          <CardsForData item={mainData} />;{/* })} */}
+          <CardsForSearch item={mainData} />
         </div>
       )}
     </div>

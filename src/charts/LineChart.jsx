@@ -52,14 +52,19 @@ const datasets = [
           labels: dates,
           datasets: datasets,
         }}
-        options={{
+        options={
+           
+          {
           maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: false,
             },
           },
-        }}
+         
+        }
+        
+        }
         height={300}
       />
     </div>

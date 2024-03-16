@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useData } from '../../Context/DataContext';
+import { useParams } from 'react-router-dom';
 
 export const CandlestickChart = () => {
   // Data Came from DataContext
     const { stock } = useData(); 
-  
+  let { id } = useParams();
+  console.log("ID = ",id)
   const [chartOptions, setChartOptions] = useState({
     series: [{
       data: stock.map(({ date, open, high, low, close }) => ({
@@ -22,10 +24,6 @@ export const CandlestickChart = () => {
         toolbar: {
           show: false
         }
-      },
-      title: {
-        text: 'Candlestick Chart',
-        align: 'left'
       },
       xaxis: {
         type: 'datetime',

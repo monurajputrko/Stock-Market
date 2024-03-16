@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-
+import { debounce } from "lodash";
 export const DataContext = createContext();
 
 export const useData = () => useContext(DataContext); // Use context Functions for Consuming Data form DataContext
@@ -12,7 +12,8 @@ export const DataProvider = ({ children }) => {
   const [Error, setError] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [Fetching, setFetching] = useState(true);
-  const [Commodities,setCommodities] = useState(false);
+  const [Commodities, setCommodities] = useState(false);
+  const [cards, setCards] = useState(false);
 
   function generateRandomString(length) {
     const characters =
@@ -40,7 +41,7 @@ export const DataProvider = ({ children }) => {
     //   key = "";
     //   url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=EPL.BSE&outputsize=full&apikey=${randomString}`;
     // }
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await fetch(
         "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey=qdkxseuesdhfue"
@@ -62,10 +63,10 @@ export const DataProvider = ({ children }) => {
         };
         datesData.push(dateData);
       });
-     const sliced = datesData.slice(0, 15);
-     console.log(sliced);
-     setStockData(sliced);
-      setLoading(false)
+      const sliced = datesData.slice(0, 15);
+      console.log(sliced);
+      setStockData(sliced);
+      setLoading(false);
       setError(false);
       setCommodities(false);
     } catch (error) {
@@ -74,7 +75,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  console.log(stock);
+  // console.log(stock);
   const handleSearchResult = async () => {
     try {
       const responseData1 = await fetch(
@@ -105,7 +106,44 @@ export const DataProvider = ({ children }) => {
       setCommodities(false);
     } catch (error) {
       console.log("Function Not Invoked");
-       setError(true);
+      setError(true);
+      console.log("Error = ", error);
+    }
+  };
+
+  //////////
+
+  const handleDetails = async (text) => {
+    try {
+      const responseData1 = await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${text}&outputsize=full&apikey=qdkxseuesdhfue`
+      );
+      const resdata1 = await responseData1.json();
+
+      const weeklyTimeSeries = resdata1["Time Series (Daily)"];
+      const dates = Object.keys(weeklyTimeSeries);
+      const datesData = [];
+      dates.forEach((date) => {
+        const weeklyData = weeklyTimeSeries[date];
+        const dateData = {
+          date: date,
+          open: weeklyData["1. open"],
+          high: weeklyData["2. high"],
+          low: weeklyData["3. low"],
+          close: weeklyData["4. close"],
+          volume: weeklyData["5. volume"],
+        };
+        datesData.push(dateData);
+      });
+      const sliced = datesData.slice(0, 15);
+      console.log(sliced);
+      setStockData(sliced);
+      console.log("Function Invoked again");
+      setError(false);
+      setCommodities(false);
+    } catch (error) {
+      console.log("Function Not Invoked");
+      setError(true);
       console.log("Error = ", error);
     }
   };
@@ -123,6 +161,19 @@ export const DataProvider = ({ children }) => {
       console.log("Error = ", error);
     }
   };
+  const fetchGlobalSearch = debounce(async (text) => {
+    try {
+      const responseData = await fetch(
+        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${text}&apikey=${randomString}`
+      );
+      const resdata = await responseData.json();
+      console.log(resdata.bestMatches);
+      setMainData(resdata.bestMatches);
+    } catch (error) {
+      setError(true);
+      console.log("Error = ", error);
+    }
+  }, 300); // Debounce for 300 milliseconds
 
   const FetchCommodities = async (text) => {
     try {
@@ -131,8 +182,8 @@ export const DataProvider = ({ children }) => {
       );
       const resdata = await responseData.json();
       // setStockData(resdata.data);
-          const sliced = resdata.data.slice(0, 15);
-          console.log(sliced);
+      const sliced = resdata.data.slice(0, 15);
+      console.log(sliced);
       setStockData(sliced);
       setCommodities(true);
       // setMainData(resdata.markets);
@@ -150,6 +201,8 @@ export const DataProvider = ({ children }) => {
   return (
     <DataContext.Provider
       value={{
+        handleDetails,
+        fetchGlobalSearch,
         FetchCommodities,
         Loading,
         handleSearchResult,
