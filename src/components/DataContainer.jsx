@@ -13,12 +13,12 @@ console.log(mainData);
       <div
         className="form-inline"
         style={{ display: "flex", justifyContent: "space-evenly" }}
-       >
+      >
         {/* Input Field for Searching */}
         <input
           className="form-control mr-sm-2"
           type="search"
-          placeholder="Search Stocks"
+          placeholder="Search for your favorite stocks. Ex. TATA,RELIANCE,ADANI"
           aria-label="Search"
           onChange={(e) => {
             setSearch(e.target.value);
@@ -37,11 +37,11 @@ console.log(mainData);
           Search
         </button>
       </div>
-      
+
       <br />
       {/* Components for Filter And Charts */}
       <Filters />
- {    }
+      {}
       {cards ? (
         <div class="ag-format-container">
           <CardsForData item={mainData} />
