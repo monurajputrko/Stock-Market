@@ -206,3 +206,89 @@ export const FetchButtons = () => {
     </div>
   );
 }
+
+export const FetchDetailFilter = () => {
+  const { stock,setTime } = useData(); // Data Came from DataContext
+  console.log(stock)
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "5px",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        {/*  When Selecting Line Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+            setTime("1 Week");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          1 Week Data
+        </Button>
+
+        {/*  When Selecting Radar Chart */}
+
+        {/*  When Selecting Bar Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+          setTime("15 Days");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          15 Days Data
+        </Button>
+
+        {/*  When Selecting Doughnut Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+           setTime("1 Month");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          1 Month Data
+        </Button>
+
+        {/*  When Selecting Polar Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+           setTime("6 Month");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          6 Months Data
+        </Button>
+
+        {/*  When Selecting Pie Chart */}
+        <Button
+          variant="info"
+          onClick={() => {
+           setTime("1 Year");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          1 Year Data
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => {
+           setTime("5 Year");
+          }}
+          style={{ marginLeft: "1vw", width: "10rem" }}
+        >
+          5 Years Data
+        </Button>
+        
+      </div>
+    </div>
+  );
+};

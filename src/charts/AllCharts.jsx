@@ -13,7 +13,8 @@ import { CandlestickChart, ComCandlestickChart } from "./Candles/LiveChart";
 export default function AllCharts() {
 
   const { ChangeChart, stock, Commodities } = useData(); // Swithing Data Came from DataContext.jsx
- 
+
+
   const chartStyle = {
     border: "2px solid black",
     padding: "10px",
@@ -28,18 +29,18 @@ export default function AllCharts() {
           {ChangeChart === "BarChart" && ( // When Selecting Bar Chart
             <div style={chartStyle}>
               {Commodities ? (
-                <ComBarChart serverData={stock} style={chartStyle} />
+                <ComBarChart style={chartStyle} />
               ) : (
-                <BarChart serverData={stock} style={chartStyle} />
+                <BarChart style={chartStyle} />
               )}
             </div>
           )}
           {ChangeChart === "LineChart" && ( // When Selecting Line Chart
             <div style={chartStyle}>
               {Commodities ? (
-                <ComLineChart serverData={stock} style={chartStyle} />
+                <ComLineChart style={chartStyle} />
               ) : (
-                <LineChart serverData={stock} style={chartStyle} />
+                <LineChart style={chartStyle} />
               )}
             </div>
           )}

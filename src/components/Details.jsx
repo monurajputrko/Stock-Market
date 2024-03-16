@@ -3,7 +3,7 @@ import { useData } from "../Context/DataContext";
 import { BarChart, ComBarChart } from "../charts/BarChart";
 import { CandlestickChart } from "../charts/Candles/LiveChart";
 import { ComLineChart, LineChart } from "../charts/LineChart";
-import Buttons, { FetchButtons } from "./Buttons";
+import Buttons, { FetchButtons, FetchDetailFilter } from "./Buttons";
 
 
 export default function Details() {
@@ -70,7 +70,8 @@ export default function Details() {
              <h1>Loading....</h1>
            </div>
          )}
-       </div>
+           </div>
+           <FetchDetailFilter />
      </>
    );
 }

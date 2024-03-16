@@ -11,9 +11,11 @@ export const DataProvider = ({ children }) => {
   const [stock, setStockData] = useState([]);
   const [Error, setError] = useState(false);
   const [Loading, setLoading] = useState(false);
+  const [time, setTime] = useState("1 Week");
   const [Fetching, setFetching] = useState(true);
   const [Commodities, setCommodities] = useState(false);
   const [cards, setCards] = useState(false);
+  
 
   function generateRandomString(length) {
     const characters =
@@ -75,6 +77,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+
   // console.log(stock);
   const handleSearchResult = async () => {
     try {
@@ -135,9 +138,9 @@ export const DataProvider = ({ children }) => {
         };
         datesData.push(dateData);
       });
-      const sliced = datesData.slice(0, 15);
-      console.log(sliced);
-      setStockData(sliced);
+      // const sliced = datesData.slice(0, 15);
+      // console.log(sliced);
+      setStockData(datesData);
       console.log("Function Invoked again");
       setError(false);
       setCommodities(false);
@@ -183,7 +186,7 @@ export const DataProvider = ({ children }) => {
       const resdata = await responseData.json();
       // setStockData(resdata.data);
       const sliced = resdata.data.slice(0, 15);
-      console.log(sliced);
+      // console.log(sliced);
       setStockData(sliced);
       setCommodities(true);
       // setMainData(resdata.markets);
@@ -202,6 +205,8 @@ export const DataProvider = ({ children }) => {
     <DataContext.Provider
       value={{
         handleDetails,
+        time,
+        setTime,
         fetchGlobalSearch,
         FetchCommodities,
         Loading,
