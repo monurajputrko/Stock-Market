@@ -1,17 +1,25 @@
-
+import { useData } from "../Context/DataContext";
 import DataContainer from "./DataContainer";
+import Errors from "./Error";
 import Header from "./Header";
 
 function Main() {
-    return (
-      <div>
-        {/* Component for Header */}
-        <Header />
-        <br />
-        {/* Component for DataContainer */}
-         <DataContainer />
-      </div>
-    );
-  }
-  
-  export default Main;
+  const { Error } = useData();
+  return (
+    <div>
+      {Error ? (
+        <>
+          <Errors />
+        </>
+      ) : (
+        <>
+          <Header />
+          <br />
+          <DataContainer />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default Main;
