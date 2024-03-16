@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "../App.css";
 import { Link, useParams } from "react-router-dom";
+import { useData } from "../Context/DataContext";
 
-export const CardsForData = ({ item }) => {
-  const [showMore, setShowMore] = useState(false); // Handling Show More State in Card
-
+export const CardsForData = () => {
+    const {
+      mainData
+  } = useData();
+  console.log(mainData);
+  const data = mainData || [];
   return (
     <>
       <div class="ag-courses_box">
-        {item.map((e, i) => {
+        {data.map((e, i) => {
           return (
             <div key={i} class="ag-courses_item">
               <a href="#" class="ag-courses-item_link">
@@ -19,7 +23,7 @@ export const CardsForData = ({ item }) => {
                   <h5 style={{ color: "red" }}>Close Currently</h5>
                 )}
 
-                <div class="ag-courses-item_title">Type - {e.type}</div>
+                <div class="ag-courses-item_title">Type - {e.market_type}</div>
                 <h6 style={{ marginTop: "-20px", color: "white" }}>
                   Country : {e.region}
                 </h6>
@@ -46,12 +50,14 @@ export const CardsForData = ({ item }) => {
   );
 };
 
-export const CardsForSearch = ({ item }) => {
-
+export const CardsForSearch = () => {
+  const { mainData } = useData();
+    console.log(mainData);
+    const data = mainData || [];
   return (
     <>
       <div class="ag-courses_box">
-        {item.map((e, i) => {
+        {data.map((e, i) => {
          
           return (
             <div key={i} class="ag-courses_item">

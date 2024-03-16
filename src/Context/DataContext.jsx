@@ -12,9 +12,9 @@ export const DataProvider = ({ children }) => {
   const [Error, setError] = useState(false);
   const [Loading, setLoading] = useState(false);
   const [time, setTime] = useState("1 Week");
-  const [Fetching, setFetching] = useState(true);
+  const [Title, setTitle] = useState("");
   const [Commodities, setCommodities] = useState(false);
-  const [cards, setCards] = useState(false);
+  const [cards, setCards] = useState(true);
   
 
   function generateRandomString(length) {
@@ -44,6 +44,7 @@ export const DataProvider = ({ children }) => {
     //   url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=EPL.BSE&outputsize=full&apikey=${randomString}`;
     // }
     setLoading(true);
+    setTitle("You Are Watching The Data of $ Vs ₹")
     try {
       const response = await fetch(
         "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey=qdkxseuesdhfue"
@@ -78,7 +79,6 @@ export const DataProvider = ({ children }) => {
   };
 
 
-  // console.log(stock);
   const handleSearchResult = async () => {
     try {
       const responseData1 = await fetch(
@@ -102,6 +102,7 @@ export const DataProvider = ({ children }) => {
         datesData.push(dateData);
       });
       const sliced = datesData.slice(0, 15);
+      setTitle(`Your Are Watching Data of ${search}`);
       console.log(sliced);
       setStockData(sliced);
       console.log("Function Invoked again");
@@ -138,9 +139,9 @@ export const DataProvider = ({ children }) => {
         };
         datesData.push(dateData);
       });
-      // const sliced = datesData.slice(0, 15);
-      // console.log(sliced);
+
       setStockData(datesData);
+      setTitle(`Your Are Watching Data of ${text} (Symbol)`);
       console.log("Function Invoked again");
       setError(false);
       setCommodities(false);
@@ -151,9 +152,9 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  //  console.log(mainData)
   const fetchGlobalMarketStatus = async () => {
     try {
+      setCards(true);
       const responseData = await fetch(
         `https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=${randomString}`
       );
@@ -165,6 +166,7 @@ export const DataProvider = ({ children }) => {
     }
   };
   const fetchGlobalSearch = debounce(async (text) => {
+    setCards(false);
     try {
       const responseData = await fetch(
         `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${text}&apikey=${randomString}`
@@ -172,6 +174,7 @@ export const DataProvider = ({ children }) => {
       const resdata = await responseData.json();
       console.log(resdata.bestMatches);
       setMainData(resdata.bestMatches);
+      // setTitle(`Your Are Watching Data of ${text} (Symbol)`);
     } catch (error) {
       setError(true);
       console.log("Error = ", error);
@@ -187,6 +190,7 @@ export const DataProvider = ({ children }) => {
       // setStockData(resdata.data);
       const sliced = resdata.data.slice(0, 15);
       // console.log(sliced);
+      setTitle(`Your Are Watching Data of ${text}`);
       setStockData(sliced);
       setCommodities(true);
       // setMainData(resdata.markets);
@@ -206,6 +210,7 @@ export const DataProvider = ({ children }) => {
       value={{
         handleDetails,
         time,
+        cards,
         setTime,
         fetchGlobalSearch,
         FetchCommodities,
@@ -222,6 +227,7 @@ export const DataProvider = ({ children }) => {
         randomString,
         Error,
         setError,
+        Title,
         Commodities,
       }}
     >

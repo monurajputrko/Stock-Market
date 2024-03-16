@@ -4,9 +4,22 @@ import { useData } from "../Context/DataContext";
 
 export const BarChart = () => {
   // Get unique values for each field
-  const { stock } = useData();
-
-  const stockData = stock || [];
+  const { stock, time } = useData();
+  let sliced = [];
+  if (time === "1 Week") {
+    sliced = stock.slice(0, 7);
+  } else if (time === "1 Month") {
+    sliced = stock.slice(0, 30);
+  } else if (time === "6 Month") {
+    sliced = stock.slice(0, 180);
+  } else if (time === "1 Year") {
+    sliced = stock.slice(0, 365);
+  } else if (time === "5 Year") {
+    sliced = stock.slice(0, 1825);
+  } else if (time === "15 Days") {
+    sliced = stock.slice(0, 15);
+  }
+  const stockData = sliced || [];
   const dates = stockData.map((data) => data.date).reverse(); // Reverse to show recent dates first
   const openingPrices = stockData.map((data) => parseFloat(data.open));
   const closingPrices = stockData.map((data) => parseFloat(data.close));
@@ -69,23 +82,10 @@ export const BarChart = () => {
 // export const DetailData = (data) => {};
 
 export const ComBarChart = () => {
-  const { stock,time } = useData();
-  let sliced = [];
-  if (time === "1 Week") {
-     sliced = stock.slice(0, 7);
-  } else if (time === "1 Month") {
-     sliced = stock.slice(0, 7);
-  } else if (time === "6 Month") {
-     sliced = stock.slice(0, 7);
-  } else if (time === "1 Year") {
-     sliced = stock.slice(0, 7);
-  } else if (time === "5 Year") {
-     sliced = stock.slice(0, 7);
-  } else if (time === "15 Days") {
-     sliced = stock.slice(0, 7);
-  }
+  const { stock } = useData();
+  
 
-  const stockData = sliced || [];
+  const stockData = stock || [];
   const dates = stockData.map((data) => data.date);
   const values = stockData.map((data) => parseFloat(data.value));
 

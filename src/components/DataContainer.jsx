@@ -4,9 +4,9 @@ import Filters from "./Filters";
 import { useData } from "../Context/DataContext";
 
 const DataContainer = () => {
-  const { handleSearchResult, setSearch, mainData, fetchGlobalSearch } =
+  const { handleSearchResult, setSearch, mainData, fetchGlobalSearch,cards,Title } =
     useData(); // Data Came From DataContext
-
+console.log(mainData);
   return (
     <div className="tabsClass">
       {/* Form for Searching */}
@@ -37,16 +37,16 @@ const DataContainer = () => {
           Search
         </button>
       </div>
+      
       <br />
       {/* Components for Filter And Charts */}
       <Filters />
-
-      {/* {mainData.length > 0 && (
+ {    }
+      {cards ? (
         <div class="ag-format-container">
           <CardsForData item={mainData} />
         </div>
-      )} */}
-      {mainData.length > 0 && (
+      ) : (
         <div class="ag-format-container">
           <CardsForSearch item={mainData} />
         </div>

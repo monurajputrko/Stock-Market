@@ -4,10 +4,11 @@ import { BarChart, ComBarChart } from "../charts/BarChart";
 import { CandlestickChart } from "../charts/Candles/LiveChart";
 import { ComLineChart, LineChart } from "../charts/LineChart";
 import Buttons, { FetchButtons, FetchDetailFilter } from "./Buttons";
+import '../App.css';
 
 
 export default function Details() {
-    const { ChangeChart, stock, Commodities, handleDetails } = useData(); // Swithing Data Came from DataContext.jsx
+    const { ChangeChart, stock, Commodities, handleDetails,Title } = useData(); // Swithing Data Came from DataContext.jsx
     
       let { id } = useParams();
     console.log("OK = ", id);
@@ -25,6 +26,7 @@ export default function Details() {
        <Buttons />
 
        <div>
+         <h4>{Title}</h4>
          {stock !== "" ? (
            <div>
              {ChangeChart === "BarChart" && ( // When Selecting Bar Chart
@@ -58,7 +60,6 @@ export default function Details() {
              )}
            </div>
          ) : (
-           // Showing when Data is in Loading state
            <div
              style={{
                display: "flex",
@@ -67,11 +68,11 @@ export default function Details() {
                margin: "50px",
              }}
            >
-             <h1>Loading....</h1>
+             <div class="loader"></div>
            </div>
          )}
-           </div>
-           <FetchDetailFilter />
+       </div>
+       <FetchDetailFilter />
      </>
    );
 }

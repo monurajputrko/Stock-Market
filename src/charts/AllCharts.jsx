@@ -1,18 +1,17 @@
 
 import PolarChart from './PolarChart';
 import DoughnutChart from './DoughnutChart';
+import "../components/Loader.css";
 import { ComBarChart, BarChart } from "./BarChart";
 import {ComLineChart, LineChart} from './LineChart';
 import RadarChart from './RadarChart';
 import PieChart from './PieChart';
 import { useData } from '../Context/DataContext';
-import { useEffect, useState } from 'react';
-import { randomString } from './Candles/Constant';
-import { CandlestickChart, ComCandlestickChart } from "./Candles/LiveChart";
+import { CandlestickChart } from "./Candles/LiveChart";
 
 export default function AllCharts() {
 
-  const { ChangeChart, stock, Commodities } = useData(); // Swithing Data Came from DataContext.jsx
+  const { ChangeChart, stock, Commodities,Title } = useData(); // Swithing Data Came from DataContext.jsx
 
 
   const chartStyle = {
@@ -24,6 +23,7 @@ export default function AllCharts() {
   return (
     // Showing when Data is Loaded
     <div>
+      <h4>{Title}</h4>
       {stock !== "" ? (
         <div>
           {ChangeChart === "BarChart" && ( // When Selecting Bar Chart
@@ -66,7 +66,7 @@ export default function AllCharts() {
             margin: "50px",
           }}
         >
-          <h1>Loading....</h1>
+          <div class="loader"></div>
         </div>
       )}
     </div>
